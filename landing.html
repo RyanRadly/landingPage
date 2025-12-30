@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Portal</title>
+    <style>
+        :root {
+            /* Brand Colors */
+            --primary-main: #007FA3;
+            --primary-light: #99CCDA;
+            --primary-dark: #00475C;
+            --accent-orange: #EA8B23;
+            --accent-yellow: #FFC609;
+            --accent-green: #289974;
+
+            /* Light Mode */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafb;
+            --bg-card: #ffffff;
+            --text-primary: #00475C;
+            --text-secondary: #4a6572;
+            --border-color: #e2e8ed;
+            --shadow-color: rgba(0, 71, 92, 0.08);
+            --shadow-hover: rgba(0, 127, 163, 0.15);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0d1b21;
+                --bg-secondary: #132a33;
+                --bg-card: #1a3540;
+                --text-primary: #e8f4f8;
+                --text-secondary: #99CCDA;
+                --border-color: #2a4a56;
+                --shadow-color: rgba(0, 0, 0, 0.3);
+                --shadow-hover: rgba(0, 127, 163, 0.25);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .instances {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .instance-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instance-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-main);
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+
+        .instance-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .instance-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .instance-card:focus {
+            outline: 2px solid var(--primary-main);
+            outline-offset: 2px;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .card-arrow {
+            margin-top: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary-main);
+            transition: gap 0.2s ease;
+        }
+
+        .instance-card:hover .card-arrow {
+            gap: 0.75rem;
+        }
+
+        .card-arrow svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Badge for environment indicators */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.625rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .badge-production {
+            background: rgba(40, 153, 116, 0.15);
+            color: var(--accent-green);
+        }
+
+        .badge-staging {
+            background: rgba(234, 139, 35, 0.15);
+            color: var(--accent-orange);
+        }
+
+        .badge-development {
+            background: rgba(255, 198, 9, 0.15);
+            color: #b8930a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .badge-development {
+                color: var(--accent-yellow);
+            }
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 2rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .instances {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Application Portal</h1>
+            <p class="subtitle">Select an environment below to access the application instance best suited for your
+                needs.</p>
+        </header>
+
+        <main class="instances">
+            <!-- Production Instance -->
+            <a href="https://app.example.com" class="instance-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <span class="badge badge-production">Production</span>
+                <h2 class="card-title">Production Environment</h2>
+                <p class="card-description">The stable, live environment for everyday use. Recommended for all standard
+                    operations and end-user access.</p>
+                <span class="card-arrow">
+                    Launch Application
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </span>
+            </a>
+
+            <!-- Staging Instance -->
+            <a href="https://staging.example.com" class="instance-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                    </svg>
+                </div>
+                <span class="badge badge-staging">Staging</span>
+                <h2 class="card-title">Staging Environment</h2>
+                <p class="card-description">Pre-production testing environment. Use this to validate new features before
+                    they go live.</p>
+                <span class="card-arrow">
+                    Launch Application
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </span>
+            </a>
+
+            <!-- Development Instance -->
+            <a href="https://dev.example.com" class="instance-card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                </div>
+                <span class="badge badge-development">Development</span>
+                <h2 class="card-title">Development Environment</h2>
+                <p class="card-description">Active development sandbox with the latest experimental features. May be
+                    unstable—intended for developers only.</p>
+                <span class="card-arrow">
+                    Launch Application
+                    <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </span>
+            </a>
+        </main>
+
+        <footer>
+            <p>Need help? Contact your system administrator.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
