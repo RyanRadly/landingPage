@@ -253,19 +253,17 @@
         </header>
 
         <main class="instances">
-            <!-- Production Instance -->
-            <a href="https://app.example.com" class="instance-card">
+            <!-- On-Premise Instance -->
+            <a href="https://onprem.example.com" class="instance-card">
                 <div class="card-icon">
                     <svg viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                        <path d="M2 17l10 5 10-5" />
-                        <path d="M2 12l10 5 10-5" />
+                        <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-4h6v4M8 12h2M14 12h2M8 16h2M14 16h2" />
                     </svg>
                 </div>
-                <span class="badge badge-production">Production</span>
-                <h2 class="card-title">Production Environment</h2>
-                <p class="card-description">The stable, live environment for everyday use. Recommended for all standard
-                    operations and end-user access.</p>
+                <span class="badge badge-production">On-Premise</span>
+                <h2 class="card-title">On-Premise Instance</h2>
+                <p class="card-description">Access the primary application instance hosted locally within our corporate
+                    infrastructure. Optimized for maximum speed and internal security compliance.</p>
                 <span class="card-arrow">
                     Launch Application
                     <svg viewBox="0 0 24 24">
@@ -274,38 +272,18 @@
                 </span>
             </a>
 
-            <!-- Staging Instance -->
-            <a href="https://staging.example.com" class="instance-card">
+            <!-- Colocation Instance -->
+            <a href="https://colo.example.com" class="instance-card">
                 <div class="card-icon">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M12 6v6l4 2" />
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <path d="M22 10H2M2 14h20M6 18h.01M10 18h.01" />
                     </svg>
                 </div>
-                <span class="badge badge-staging">Staging</span>
-                <h2 class="card-title">Staging Environment</h2>
-                <p class="card-description">Pre-production testing environment. Use this to validate new features before
-                    they go live.</p>
-                <span class="card-arrow">
-                    Launch Application
-                    <svg viewBox="0 0 24 24">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                </span>
-            </a>
-
-            <!-- Development Instance -->
-            <a href="https://dev.example.com" class="instance-card">
-                <div class="card-icon">
-                    <svg viewBox="0 0 24 24">
-                        <polyline points="16 18 22 12 16 6" />
-                        <polyline points="8 6 2 12 8 18" />
-                    </svg>
-                </div>
-                <span class="badge badge-development">Development</span>
-                <h2 class="card-title">Development Environment</h2>
-                <p class="card-description">Active development sandbox with the latest experimental features. May be
-                    unstable—intended for developers only.</p>
+                <span class="badge badge-staging">Colocation</span>
+                <h2 class="card-title">Colocation Instance</h2>
+                <p class="card-description">Access the secondary instance hosted at our external data center. Provides
+                    high availability and redundancy for critical business continuity.</p>
                 <span class="card-arrow">
                     Launch Application
                     <svg viewBox="0 0 24 24">
