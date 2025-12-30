@@ -228,6 +228,18 @@
             font-size: 0.875rem;
         }
 
+        footer a {
+            color: var(--primary-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 2rem 1rem;
@@ -294,7 +306,8 @@
         </main>
 
         <footer>
-            <p>Need help? Contact your system administrator.</p>
+            <p>Need more information? View the <a href="https://docs.example.com">documentation site</a> or <a
+                    href="mailto:admin@example.com">contact your system administrator</a>.</p>
         </footer>
     </div>
 </body>
